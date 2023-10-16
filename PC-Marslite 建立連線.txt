@@ -1,0 +1,36 @@
+PC-Marslite 建立連線
+1.
+mars-nctu:$sudo vim /etc/hosts
+//用ifconfig查自己的電腦IP並補上使用者名稱
+mars-nctu:$sudo vim /etc/hostname
+//加上自己的電腦名稱ex:matt-virtual-machine
+laptop:$sudo vim /etc/hosts
+//加上mars的IP跟名字
+
+2.
+到家目錄->連接伺服器，輸入sftp://192.168.50.77/home/ros，
+使用者名稱:ros
+密碼:marslite
+連接後搬移mars_lite_remote_ws到本機家目錄
+
+3.
+到終端機進入mars_lite_remote_ws裡面catkin_make編譯
+如果遇到fatal error:
+laptop$ sudo apt-get install ros-kinetic-moveit
+laptop$ sudo apt-get install qtbase5-dev
+laptop$ sudo apt-get install ros-kinetic-move-base-msgs
+重新catkin_make
+
+4.
+laptop$ sudo vim ~/.bashrc
+//加入快捷指令
+alias ml=‘ssh ros@192.168.50.77’
+alias here="export ROS_HOSTNAME=localhost && export
+ROS_MASTER_URI=http://localhost:11311"
+alias mars="cd mars_lite_remote_ws && source devel/setup.bash && cd .. && export
+ROS_MASTER_URI=http://192.168.50.77:11311 && export ROS_IP=192.168.50.77
+laptop$ source ~/.bashrc
+
+
+
+
